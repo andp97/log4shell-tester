@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  log4shell-tester:
+    build: .
+    container_name: 'log4shell'
+    entrypoint: ["java", "-cp", "/log4shell.jar", "com.huntresslabs.log4shell.App", "localhost", "443", "1389", "redis://redis:6379"]
+    ports:
+      - 8443:443
+      - 1389:1389
+      - 8081:80
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    ports:
+    - 6379
+
